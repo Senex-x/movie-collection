@@ -1,4 +1,4 @@
-package com.senex.mtgcollection.presentation.common
+package com.senex.moviecollection.presentation.common
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

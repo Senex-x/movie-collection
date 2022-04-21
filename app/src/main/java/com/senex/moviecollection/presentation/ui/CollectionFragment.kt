@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.senex.moviecollection.databinding.FragmentCollectionBinding
-import com.senex.mtgcollection.presentation.common.inflateBinding
+import com.senex.moviecollection.presentation.common.inflateBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CollectionFragment : Fragment() {
     private var _binding: FragmentCollectionBinding? = null
     private val binding
