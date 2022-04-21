@@ -8,6 +8,6 @@ import retrofit2.http.GET
 interface MovieListApiService {
 
     @GET("Top250Movies/${RetrofitModule.API_KEY}")
-    fun getTopMovies(
+    fun getTop250Movies(
     ): Call<MovieListResponse>
 }
