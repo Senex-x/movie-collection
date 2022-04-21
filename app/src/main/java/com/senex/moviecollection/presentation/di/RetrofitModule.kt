@@ -28,5 +28,6 @@ class RetrofitModule {
 
     companion object {
         private const val BASE_URL = "https://imdb-api.com/en/API/"
+        const val API_KEY = "k_64z4ozir"
     }
 }
