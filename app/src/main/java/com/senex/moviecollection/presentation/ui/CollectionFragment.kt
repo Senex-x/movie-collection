@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.senex.moviecollection.databinding.FragmentCollectionBinding
-import com.senex.moviecollection.domain.repository.MovieRepository
+import com.senex.moviecollection.domain.usecase.GetMovies
 import com.senex.moviecollection.domain.util.log
 import com.senex.moviecollection.presentation.common.inflateBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,9 +19,6 @@ class CollectionFragment : Fragment() {
     private var _binding: FragmentCollectionBinding? = null
     private val binding
         get() = _binding!!
-
-    @Inject
-    lateinit var repo: MovieRepository
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,9 +32,7 @@ class CollectionFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?,
     ): Unit = with(binding) {
-        lifecycleScope.launch {
-            repo.getTop250().toString().log()
-        }
+
     }
 
     override fun onDestroyView() {
