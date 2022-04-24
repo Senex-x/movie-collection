@@ -1,8 +1,8 @@
-package com.senex.moviecollection.presentation.mvp.presenter
+package com.senex.moviecollection.presentation.presenter
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.senex.moviecollection.presentation.mvp.view.BruhView
+import com.senex.moviecollection.presentation.view.BruhView
 
 @InjectViewState
 class BruhPresenter : MvpPresenter<BruhView>() {

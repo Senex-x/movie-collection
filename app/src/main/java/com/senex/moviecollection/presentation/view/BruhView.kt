@@ -1,4 +1,4 @@
-package com.senex.moviecollection.presentation.mvp.view
+package com.senex.moviecollection.presentation.view
 
 import com.arellomobile.mvp.MvpView
 
