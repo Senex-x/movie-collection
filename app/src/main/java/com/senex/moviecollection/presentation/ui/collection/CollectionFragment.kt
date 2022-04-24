@@ -26,12 +26,10 @@ class CollectionFragment : MvpAppCompatFragment(), MoviesView {
     private val binding
         get() = _binding!!
 
-    @InjectPresenter // Moxy presenter
+    @InjectPresenter // Main Moxy presenter
     lateinit var moviesPresenterMoxy: MoviesPresenter
-
-    @Inject // Hilt presenter
+    @Inject // Hilt presenter, do not use
     lateinit var moviesPresenter: MoviesPresenter
-
     @ProvidePresenter
     fun providePresenter() = moviesPresenter
 
@@ -65,5 +63,13 @@ class CollectionFragment : MvpAppCompatFragment(), MoviesView {
         viewLifecycleOwner.lifecycleScope.launch {
             adapter.submitList(movies)
         }
+    }
+
+    override fun onStartMoviesLoading() {
+        binding.moviesProgressBar.visibility = View.VISIBLE
+    }
+
+    override fun onFinishMoviesLoading() {
+        binding.moviesProgressBar.visibility = View.GONE
     }
 }

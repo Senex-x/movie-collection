@@ -23,7 +23,11 @@ class MoviesPresenter @Inject constructor(
 
     init {
         lifecycleCoroutineScope.launch {
-            viewState.displayMovies(getMovies())
+            viewState.apply {
+                onStartMoviesLoading()
+                displayMovies(getMovies())
+                onFinishMoviesLoading()
+            }
         }
     }
 
