@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpAppCompatFragment
@@ -71,5 +72,10 @@ class CollectionFragment : MvpAppCompatFragment(), MoviesView {
 
     override fun onFinishMoviesLoading() {
         binding.moviesProgressBar.visibility = View.GONE
+    }
+
+    override fun onMoviesLoadingFail() {
+        binding.loadingFailedText.visibility = View.VISIBLE
+        requireContext().toast("Loading failed!")
     }
 }

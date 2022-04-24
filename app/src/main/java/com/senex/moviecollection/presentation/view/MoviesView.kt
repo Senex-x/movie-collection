@@ -9,4 +9,6 @@ interface MoviesView: MvpView {
     fun onStartMoviesLoading()
 
     fun onFinishMoviesLoading()
+
+    fun onMoviesLoadingFail()
 }

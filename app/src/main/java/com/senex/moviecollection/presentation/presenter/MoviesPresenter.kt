@@ -25,7 +25,13 @@ class MoviesPresenter @Inject constructor(
         lifecycleCoroutineScope.launch {
             viewState.apply {
                 onStartMoviesLoading()
-                displayMovies(getMovies())
+
+                val movies = getMovies()
+                if (movies.isNotEmpty())
+                    displayMovies(movies)
+                else
+                    onMoviesLoadingFail()
+
                 onFinishMoviesLoading()
             }
         }
