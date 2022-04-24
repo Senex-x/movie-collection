@@ -66,9 +66,10 @@ dependencies {
     def rxjava = "3.1.4"
     implementation "io.reactivex.rxjava3:rxjava:$rxjava"
 
-    def moxy = "1.5.5"
-    implementation "com.arello-mobile:moxy:$moxy"
-    kapt "com.arello-mobile:moxy-compiler:$moxy"
+    def moxy_androidx = "1.7.0"
+    implementation "tech.schoolhelper:moxy-x:$moxy_androidx"
+    implementation "tech.schoolhelper:moxy-x-androidx:$moxy_androidx"
+    kapt "tech.schoolhelper:moxy-x-compiler:$moxy_androidx"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

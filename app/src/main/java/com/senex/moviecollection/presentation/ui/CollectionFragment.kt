@@ -4,21 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import com.arellomobile.mvp.MvpAppCompatFragment
+import com.arellomobile.mvp.presenter.InjectPresenter
 import com.senex.moviecollection.databinding.FragmentCollectionBinding
-import com.senex.moviecollection.domain.usecase.GetMovies
-import com.senex.moviecollection.domain.util.log
 import com.senex.moviecollection.presentation.common.inflateBinding
+import com.senex.moviecollection.presentation.mvp.presenter.BruhPresenter
+import com.senex.moviecollection.presentation.mvp.view.BruhView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class CollectionFragment : Fragment() {
+class CollectionFragment : MvpAppCompatFragment(), BruhView {
     private var _binding: FragmentCollectionBinding? = null
     private val binding
         get() = _binding!!
+
+    @InjectPresenter
+    lateinit var presenter: BruhPresenter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,11 +33,15 @@ class CollectionFragment : Fragment() {
         view: View,
         savedInstanceState: Bundle?,
     ): Unit = with(binding) {
-
+        presenter.postMessage("BRUH???????????")
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun showMessage(message: String) {
+        binding.textView.text = message
     }
 }
