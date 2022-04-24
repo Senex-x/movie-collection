@@ -9,6 +9,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,6 +23,15 @@ class MoviesPresenter @Inject constructor(
     ).getMovies()
 
     init {
+        loadAndDisplayMovies()
+    }
+
+    fun refresh() {
+        viewState.displayMovies(emptyList())
+        loadAndDisplayMovies()
+    }
+
+    private fun loadAndDisplayMovies() {
         lifecycleCoroutineScope.launch {
             viewState.apply {
                 onStartMoviesLoading()
@@ -36,6 +46,7 @@ class MoviesPresenter @Inject constructor(
             }
         }
     }
+
 
     @EntryPoint
     @InstallIn(SingletonComponent::class)

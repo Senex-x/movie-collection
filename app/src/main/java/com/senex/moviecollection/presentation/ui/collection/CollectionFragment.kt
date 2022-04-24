@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpAppCompatFragment
@@ -28,11 +27,11 @@ class CollectionFragment : MvpAppCompatFragment(), MoviesView {
         get() = _binding!!
 
     @InjectPresenter // Main Moxy presenter
-    lateinit var moviesPresenterMoxy: MoviesPresenter
-    @Inject // Hilt presenter, do not use
     lateinit var moviesPresenter: MoviesPresenter
+    @Inject // Hilt presenter, do not use
+    lateinit var moviesPresenterInjected: MoviesPresenter
     @ProvidePresenter
-    fun providePresenter() = moviesPresenter
+    fun providePresenter() = moviesPresenterInjected
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,6 +52,10 @@ class CollectionFragment : MvpAppCompatFragment(), MoviesView {
     ): Unit = with(binding) {
         collectionRecycler.layoutManager = LinearLayoutManager(requireContext())
         collectionRecycler.adapter = adapter
+
+        swipeRefreshLayout.setOnRefreshListener {
+            moviesPresenter.refresh()
+        }
     }
 
     override fun onDestroyView() {
@@ -61,6 +64,7 @@ class CollectionFragment : MvpAppCompatFragment(), MoviesView {
     }
 
     override fun displayMovies(movies: List<Movie>) {
+        binding.loadingFailedText.visibility = View.GONE
         viewLifecycleOwner.lifecycleScope.launch {
             adapter.submitList(movies)
         }
@@ -72,6 +76,7 @@ class CollectionFragment : MvpAppCompatFragment(), MoviesView {
 
     override fun onFinishMoviesLoading() {
         binding.moviesProgressBar.visibility = View.GONE
+        binding.swipeRefreshLayout.isRefreshing = false
     }
 
     override fun onMoviesLoadingFail() {
