@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Movie collection</string>
+    <string name="loading_failed_message">Loading failed, try again later</string>
 </resources>

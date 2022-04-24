@@ -9,8 +9,8 @@ class GetMovies @Inject constructor(
     suspend operator fun invoke(
         pageSize: Int = 250,
         pageIndex: Int = 0,
-    ) = movieRepository.getTop250().subList(
+    ) = movieRepository.getTop250().takeIf { it.isNotEmpty() }?.subList(
         pageSize * pageIndex,
         pageSize * (pageIndex + 1)
-    )
+    ) ?: emptyList()
 }
