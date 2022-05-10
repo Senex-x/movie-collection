@@ -5,12 +5,13 @@ import com.senex.moviecollection.domain.repository.MovieRepository
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 
-class GetMoviesTest {
+internal class GetMoviesTest {
     companion object {
         private const val TEST_ID = "Test id"
         private const val TEST_TITLE = "Test Title"
@@ -39,12 +40,11 @@ class GetMoviesTest {
     }
 
     @Test
-    fun `Should return unchanged movies`() {
-        runBlocking {
-            val movie = getMovies().first()
+    @ExperimentalCoroutinesApi
+    fun `Should return unchanged movies`() = runTest {
+        val movie = getMovies().first()
 
-            assertEquals(movie.id, TEST_ID)
-            assertEquals(movie.fullTitle, TEST_TITLE)
-        }
+        assertEquals(movie.id, TEST_ID)
+        assertEquals(movie.fullTitle, TEST_TITLE)
     }
 }
