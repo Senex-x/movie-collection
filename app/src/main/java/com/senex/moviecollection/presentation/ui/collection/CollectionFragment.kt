@@ -70,11 +70,10 @@ class CollectionFragment : MvpAppCompatFragment(), MoviesView {
     }
 
     override fun onStartMoviesLoading() {
-        binding.moviesProgressBar.visibility = View.VISIBLE
+        binding.swipeRefreshLayout.isRefreshing = true
     }
 
     override fun onFinishMoviesLoading() {
-        binding.moviesProgressBar.visibility = View.GONE
         binding.swipeRefreshLayout.isRefreshing = false
     }
 

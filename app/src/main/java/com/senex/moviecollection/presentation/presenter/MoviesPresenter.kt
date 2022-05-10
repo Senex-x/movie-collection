@@ -16,7 +16,6 @@ class MoviesPresenter @Inject constructor(
     }
 
     fun refresh() {
-        viewState.displayMovies(emptyList())
         loadAndDisplayMovies()
     }
 
