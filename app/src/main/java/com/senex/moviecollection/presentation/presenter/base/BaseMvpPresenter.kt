@@ -1,4 +1,4 @@
-package com.senex.moviecollection.presentation.presenter
+package com.senex.moviecollection.presentation.presenter.base
 
 import androidx.annotation.CallSuper
 import com.arellomobile.mvp.MvpPresenter

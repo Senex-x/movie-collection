@@ -26,12 +26,11 @@ class CollectionFragment : MvpAppCompatFragment(), MoviesView {
     private val binding
         get() = _binding!!
 
-    @InjectPresenter // Main Moxy presenter
+    @Inject
+    @InjectPresenter
     lateinit var moviesPresenter: MoviesPresenter
-    @Inject // Hilt presenter, do not use
-    lateinit var moviesPresenterInjected: MoviesPresenter
     @ProvidePresenter
-    fun providePresenter() = moviesPresenterInjected
+    fun providePresenter() = moviesPresenter
 
     override fun onCreateView(
         inflater: LayoutInflater,
