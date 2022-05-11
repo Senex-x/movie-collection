@@ -3,24 +3,20 @@ package com.senex.moviecollection.presentation.presenter
 import com.senex.moviecollection.domain.model.Movie
 import com.senex.moviecollection.domain.usecase.GetMovies
 import com.senex.moviecollection.presentation.view.`MoviesView$$State`
+import com.senex.moviecollection.util.MainThreadExtension
 import io.mockk.coEvery
 import io.mockk.mockk
 import io.mockk.verifyOrder
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.newSingleThreadContext
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.setMain
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 
 @DelicateCoroutinesApi
 @ExperimentalCoroutinesApi
+@ExtendWith(MainThreadExtension::class)
 internal class MoviesPresenterTest {
-    private val mainThreadSurrogate = newSingleThreadContext("Main")
-
     lateinit var presenter: MoviesPresenter
     private val viewState = mockk<`MoviesView$$State`>(relaxed = true)
     private val getMovies = mockk<GetMovies>(relaxed = true)
@@ -32,8 +28,6 @@ internal class MoviesPresenterTest {
 
     @BeforeEach
     fun beforeEach() {
-        Dispatchers.setMain(mainThreadSurrogate)
-
         coEvery { getMovies.invoke() } returns movies
         presenter = MoviesPresenter(getMovies)
         presenter.setViewState(viewState)
@@ -61,11 +55,5 @@ internal class MoviesPresenterTest {
             viewState.onMoviesLoadingFail()
             viewState.onFinishMoviesLoading()
         }
-    }
-
-    @AfterEach
-    fun afterEach() {
-        Dispatchers.resetMain()
-        mainThreadSurrogate.close()
     }
 }

@@ -2,6 +2,7 @@ package com.senex.moviecollection.domain.usecase
 
 import com.senex.moviecollection.domain.model.Movie
 import com.senex.moviecollection.domain.repository.MovieRepository
+import com.senex.moviecollection.util.MainThreadExtension
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
@@ -10,6 +11,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 
 internal class GetMoviesTest {
     companion object {
