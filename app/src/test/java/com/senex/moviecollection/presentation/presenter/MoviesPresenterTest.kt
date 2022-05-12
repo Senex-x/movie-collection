@@ -4,6 +4,7 @@ import com.senex.moviecollection.domain.model.Movie
 import com.senex.moviecollection.domain.usecase.GetMovies
 import com.senex.moviecollection.presentation.view.`MoviesView$$State`
 import com.senex.moviecollection.util.MainThreadExtension
+import com.senex.moviecollection.util.RxSchedulerExtension
 import io.mockk.coEvery
 import io.mockk.mockk
 import io.mockk.verifyOrder
@@ -15,7 +16,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 
 @DelicateCoroutinesApi
 @ExperimentalCoroutinesApi
-@ExtendWith(MainThreadExtension::class)
+@ExtendWith(MainThreadExtension::class, RxSchedulerExtension::class)
 internal class MoviesPresenterTest {
     lateinit var presenter: MoviesPresenter
     private val viewState = mockk<`MoviesView$$State`>(relaxed = true)
